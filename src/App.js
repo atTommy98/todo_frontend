@@ -1,23 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import React, { useState } from "react";
+import axios from "axios";
+import TodoList from "./components/TodoList";
 
 function App() {
+  const [data, setData] = useState({
+    firstName: "Sam",
+  });
+
+  function getData() {
+    axios.get("http://localhost:3000").then((res) => {
+      setData(res.data);
+    });
+  }
+
+  function sendData() {
+    axios
+      .post("http://localhost:3000/reverse", data)
+      .then((res) => {
+        setData((prev) => ({
+          ...data,
+          firstName: res.data,
+        }));
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="App--container">
+        <button>Add</button>
+        <TodoList />
+      </div>
     </div>
   );
 }

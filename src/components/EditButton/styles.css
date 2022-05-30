@@ -1,0 +1,10 @@
+.editButton {
+   border: none;
+   background-color: rgb(233, 159, 21);
+   border-radius: 2px;
+   width: 60px;
+   height: 35px;
+   padding: 5px;
+   margin: 0 5px;
+   cursor: pointer;
+}
